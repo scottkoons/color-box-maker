@@ -1,19 +1,66 @@
-import ReactDOM from "react-dom";
-import { Formik, Field, Form } from "formik";
-import React, { useState } from "react";
-import { Button, Container } from '@material-ui/core';
-// import { Box } from '@material-ui/core/styles';
+import { useState } from 'react';
 
-const NewBoxForm = () => {
+const NewBoxForm = ({ addBox }) => {
+    const INITIAL_STATE = {
+        width: '',
+        height: '',
+        color: ''
+    };
+
+    const [formData, setFormData] = useState(INITIAL_STATE);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(formData => ({
+            ...formData,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addBox({ ...formData });
+        setFormData(INITIAL_STATE);
+    };
+
     return (
-        <>
-            <Container>
-                <Button variant="contained" color="primary">
-                    NewBoxForm Btn test
-            </Button>
-            </Container>
-        </>
+        <form onSubmit={handleSubmit}>
+
+            <label htmlFor="width">Width</label>
+            <input
+                id="width"
+                type="text"
+                name="width"
+                placeholder="200px"
+                value={formData.width}
+                onChange={handleChange}
+            />
+
+            <label htmlFor="height">Height</label>
+            <input
+                id="height"
+                type="text"
+                name="height"
+                placeholder="200px"
+                value={formData.height}
+                onChange={handleChange}
+            />
+
+            <label htmlFor="color">Color</label>
+            <input
+                id="color"
+                type="text"
+                name="color"
+                placeholder="blue"
+                value={formData.color}
+                onChange={handleChange}
+            />
+
+            <button>Add Box</button>
+
+        </form>
     );
+
 };
 
 export default NewBoxForm;

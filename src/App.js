@@ -1,14 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import BoxList from './BoxList';
-import { Save, Delete } from '@material-ui/icons';
+import BoxList from "./BoxList";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>You can create a new box</h1>
         < BoxList />
-        <img src={logo} className="App-logo" alt="logo" />
       </header>
     </div>
   );
